@@ -16,7 +16,7 @@ def main():
     description = f"🔥{description}\n\n{hashtagsforDescription}"
     if not title:
         print("⚠️ No title - exit the function")
-        return  
+        return
 
     numberOfSet = input("Enter Set number: ")
     title = f"Chillstep Set#{numberOfSet} - {title}"

@@ -202,6 +202,12 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-#folders
-sets/
-tracks/
+# Ignore generated content
+sets/*
+tracks/*
+images/*
+videos/*
+
+# Ignore secrets & tokens
+.client_secret.json
+.token.pickle

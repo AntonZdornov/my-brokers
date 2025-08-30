@@ -18,11 +18,12 @@ def main():
         print("⚠️ No title - exit the function")
         return
 
-    numberOfSet = input("Enter Set number: ")
-    title = f"Chillstep Set#{numberOfSet} - {title}"
     print(f"Title: {title}")
     print(f"Description: {description}")
     print(f"Hashtags: {tags}")
+    numberOfSet = input("Enter Set number: ")
+    title = f"Chillstep Set#{numberOfSet} - {title}"
+    print(f"Title: {title}")
 
     parser = argparse.ArgumentParser(description="Auto DJ: simple or beat-aware mixing")
     parser.add_argument("folder", help="Папка с музыкой (mp3/wav/flac/m4a/aac)")

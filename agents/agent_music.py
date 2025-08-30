@@ -23,7 +23,7 @@ def get_set_name(
         input=[
             {
                 "role": "system",
-                "content": "You name music sets min 4 words, Return **only** valid JSON, without any markdown formatting json with keys: title, description, hashtags only separated by commas.",
+                "content": "You name music sets longer than 4 words, Return **only** valid JSON, without any markdown formatting json with keys: title, description, hashtags only separated by commas.",
             },
             {"role": "user", "content": prompt},
         ],

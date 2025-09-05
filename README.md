@@ -6,8 +6,8 @@ pip install -r requirements.txt установить
 # commands
 ruff format
 ruff check, and check --fix
-python main.py tracks/ sets/mix.mp3 --mode beats --xfade-beats 16 --playlist WorkCodingFocus
-python main.py tracks/ sets/mix.mp3 --mode simple --xfade-beats 16 --playlist WorkCodingFocus
+python main.py
+
 
 # Check
 langChain посмотреть

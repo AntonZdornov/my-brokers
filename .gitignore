@@ -203,10 +203,7 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Ignore generated content
-sets/*
-tracks/*
-images/*
-videos/*
+assets/*
 
 # Ignore secrets & tokens
 client_secret.json

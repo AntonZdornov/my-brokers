@@ -69,7 +69,7 @@ def upload_video(
         file_path,
         chunksize=1024 * 1024 * 8,  # 8MB чанки (резюмируемая загрузка)
         resumable=True,
-        mimetype="video/mp4",  # желательно H.264 + AAC
+        mimetype="/assets/video/mp4",  # желательно H.264 + AAC
     )
 
     request = youtube.videos().insert(

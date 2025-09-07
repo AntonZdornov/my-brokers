@@ -19,17 +19,18 @@ def createSet():
     print("1) Drum And Bass")
     print("2) ChillStep")
     print("3) Lofi")
-
+    
     style = input("Style number: ").strip()
-    if style == "1":
-        style = "Drum&Bass"
-    elif style == "2":
-        style = "ChillStep"
-    elif style == "3":
-        style = "Lofi"
-    else:
-        print("Error")
-        return
+    match style:
+        case "1":
+            style = "Drum&Bass"
+        case "2":
+            style = "ChillStep"
+        case "3":
+            style = "Lofi"
+        case _:
+            print("Error")
+            return
 
     result = get_set_name(style)
 

@@ -19,18 +19,16 @@ def createSet():
     print("1) Drum And Bass")
     print("2) ChillStep")
     print("3) Lofi")
-    
+
     style = input("Style number: ").strip()
-    match style:
-        case "1":
-            style = "Drum&Bass"
-        case "2":
-            style = "ChillStep"
-        case "3":
-            style = "Lofi"
-        case _:
-            print("Error")
-            return
+    if(style == "1"):
+        style = "Drum&Bass"
+    elif style == "2":
+        style = "ChillStep"
+    elif style == "3":
+        style = "Lofi"
+    else:
+        print("Error")
 
     result = get_set_name(style)
 
@@ -102,7 +100,7 @@ def createSet():
             title=title,
             description=description,
             tags=tags,
-            privacy_status="private", #"public" "private"-for tests
+            privacy_status="public",  # "public" "private"-for tests
             category_id=DEFAULT_CATEGORY_ID,
             made_for_kids=False,
         )
@@ -123,7 +121,7 @@ def createSet():
 
     except DataError as e:
         print(f"HTTP Error: {e}")
-        if e.resp and hasattr(e, 'content') and e.content:
+        if e.resp and hasattr(e, "content") and e.content:
             try:
                 print(json.loads(e.content.decode("utf-8")))
             except Exception:

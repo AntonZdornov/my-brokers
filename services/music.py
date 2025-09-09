@@ -21,7 +21,7 @@ def createSet():
     print("3) Lofi")
 
     style = input("Style number: ").strip()
-    if(style == "1"):
+    if style == "1":
         style = "Drum&Bass"
     elif style == "2":
         style = "ChillStep"

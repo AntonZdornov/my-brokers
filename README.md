@@ -1,6 +1,6 @@
 # my-brokers Setup
 python3.11 -m venv venv
-source venv/bin/activate
+source .venv311/bin/activate
 pip install -r requirements.txt 
 
 # commands

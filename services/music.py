@@ -68,12 +68,17 @@ def createSet():
     print("1) Lofi")
     print("2) ChillStep")
     print("3) DrumAndBass")
+    print("4) Deep Focus Lofi")
 
     playlist = input("Playlist number: ")
     if playlist == "1":
-        playlist = "simple"
+        playlist = "Lofi"
     elif playlist == "2":
-        playlist = "beats"
+        playlist = "ChillStep"
+    elif playlist == "3":
+        playlist = "DrumAndBass"
+    elif playlist == "4":
+        playlist = "Deep Focus Lofi"
     else:
         print("Error")
         return

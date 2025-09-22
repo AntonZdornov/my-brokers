@@ -3,6 +3,7 @@ import ChatTTS
 import torchaudio
 import numpy as np
 import os
+from datetime import datetime
 
 # ---------- жёсткие настройки окружения ----------
 os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"  # пусть даже не думает о MPS
@@ -14,19 +15,6 @@ def split_text_by_words(text, chunk_size=30):
     words = text.split()
     chunks = [" ".join(words[i:i+chunk_size]) for i in range(0, len(words), chunk_size)]
     return chunks
-
-def load_wav_1d(path: str, target_sr: int = 24000, device: str = "cpu") -> torch.Tensor:
-    wav, sr = torchaudio.load(path)  # [C, T]
-    if wav.size(0) > 1:  # стерео -> моно
-        wav = wav.mean(dim=0, keepdim=False)  # [T]
-    else:
-        wav = wav.squeeze(0)  # [T]
-    if sr != target_sr:
-        wav = torchaudio.functional.resample(wav.unsqueeze(0), sr, target_sr).squeeze(
-            0
-        )  # [T]
-    return wav.to(device).to(torch.float32)
-
 
 def to_44k(wav, orig_sr=24000, new_sr=44100):
     if isinstance(wav, np.ndarray):
@@ -45,15 +33,22 @@ def record():
 
     code_max_new_token = 10000
     text_max_new_token = 5000
-    manual_seed = 42
+    manual_seed = 41
     temperature = 0.2
-    top_P = 0.6
-    top_K = 30
+    top_P = 0.5
+    top_K = 50
 
-    # wav_1d = load_wav_1d("assets/voice_example/male_01.wav", target_sr=24000, device="cpu")
-    # Фиксируем сид, чтобы голос был стабильным
-    # rand_spk = chat.sample_audio_speaker(wav_1d)
-    rand_spk = chat.sample_random_speaker()
+    # best
+    # code_max_new_token = 10000
+    # text_max_new_token = 5000
+    # manual_seed = 41 #42
+    # temperature = 0.2
+    # top_P = 0.6
+    # top_K = 30
+
+    # spk_emb = chat.sample_random_speaker()
+    # torch.save(spk_emb, "assets/voice_example/my_voice.pt")
+    spk_emb = torch.load("assets/voice_example/female_best.pt")
 
     # Стабильно и чётко (озвучка текста):
     # temperature=0.3–0.5, top_P=0.85–0.95, top_K=20–50, manual_seed=0
@@ -66,11 +61,13 @@ def record():
 
     # Настройки голоса
     params_infer_code = ChatTTS.Chat.InferCodeParams(
-        # spk_emb=rand_spk
+        spk_emb=spk_emb,
         manual_seed=manual_seed,
         temperature=temperature,
         top_P=top_P,
         top_K=top_K,
+        stream_batch=28,
+        stream_speed=8000,
         max_new_token=code_max_new_token,
     )
 
@@ -108,7 +105,11 @@ def record():
 
     audio_44k = to_44k(audio)
 
-    wavFileName = f"code-token={code_max_new_token}_text-token={text_max_new_token}_manual_seed={manual_seed}_temperature={temperature}_top-P={top_P}_top-K={top_K}.wav"
+    current_datetime = datetime.now()
+    hours = current_datetime.hour
+    minutes = current_datetime.minute
+
+    wavFileName = f"{hours}:{minutes}_code-token={code_max_new_token}_text-token={text_max_new_token}_manual_seed={manual_seed}_temperature={temperature}_top-P={top_P}_top-K={top_K}.wav"
 
     # Сохраняем в файл
     torchaudio.save(
@@ -116,4 +117,4 @@ def record():
         audio_44k,
         44100,
     )
-    print("Done: {wavFileName}")
+    print(f"Done: {wavFileName}")

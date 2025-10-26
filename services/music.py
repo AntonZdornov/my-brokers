@@ -30,7 +30,19 @@ def createSet():
     else:
         print("Error")
 
-    result = get_set_name(style)
+    print("Action:")
+    print("1) Study, Work, Coding, Focus, Relax")
+    print("2) Run, Stript, Track, Speed, Heartbeat")
+
+    action = input("Style number: ").strip()
+    if action == "1":
+        action = "Study, Work, Coding, Focus, Relax"
+    elif action == "2":
+        action = "Run, Stript, Track, Speed, Heartbeat"
+    else:
+        print("Error")
+
+    result = get_set_name(style, action)
 
     title = result.get("title", "").strip()
     description = result.get("description", "").strip()
@@ -69,6 +81,7 @@ def createSet():
     print("2) ChillStep")
     print("3) DrumAndBass")
     print("4) Deep Focus Lofi")
+    print("5) Run The Beat")
 
     playlist = input("Playlist number: ")
     if playlist == "1":
@@ -79,6 +92,9 @@ def createSet():
         playlist = "DrumAndBass"
     elif playlist == "4":
         playlist = "Deep Focus Lofi"
+    elif playlist == "5":
+        playlist = "Run The Beat"
+
     else:
         print("Error")
         return

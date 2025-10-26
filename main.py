@@ -1,12 +1,12 @@
-# from services.music import createSet
+from services.music import createSet
 # from llm_models.tts import record
 
 
 def main():
-    # model = input("Music-1,Stories-2: ").strip()
+    model = input("Music-1,Stories-2: ").strip()
 
-    # if model == "1":
-        # createSet()
+    if model == "1":
+        createSet()
     # elif model == "2":
         # record()
 

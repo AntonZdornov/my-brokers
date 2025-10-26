@@ -15,17 +15,17 @@ class SetName(BaseModel):
     description: str
 
 
-def get_set_name(style):
+def get_set_name(style, action):
     resp = client.responses.create(
         model="gpt-4o-2024-08-06",
         input=[
             {
                 "role": "system",
-                "content": "You name music sets longer than 4 words, Return **only** valid JSON, without any markdown formatting json with keys: title, description,created new hashtags only separated by commas and added to hashtags (study, work,coding , focus, relax).",
+                "content": f"You name music sets longer than 4 words, Return **only** valid JSON, without any markdown formatting json with keys: title, description,created new hashtags only separated by commas and added to hashtags ({action}).",
             },
             {
                 "role": "user",
-                "content": f"One {style} set name for focus/coding/relaxing,study,working. and description and hashtags",
+                "content": f"One {style} set name for {action}. and description and hashtags",
             },
         ],
         # text_format=SetName,
